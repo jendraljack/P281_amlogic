@@ -1,0 +1,2 @@
+#!/sbin/sh
+/sbin/busybox echo "This files loaded from $0" > /custom_version
