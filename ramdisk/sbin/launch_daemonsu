@@ -1,0 +1,18 @@
+#!/sbin/sh
+/sbin/busybox mount -o rw,remount /system
+/sbin/busybox mount -o rw,remount /
+/sbin/busybox mkdir -m 0755 /su/bin
+/sbin/busybox chown 0.0 /su/bin
+/sbin/busybox cat /sbin/su > /su/bin/su
+/sbin/busybox cat /sbin/su > /su/bin/daemonsu
+/sbin/busybox cat /sbin/su > /su/bin/supolicy
+/sbin/busybox cat /sbin/supolicy_wrapped > /su/bin/supolicy_wrapped
+/sbin/busybox cat /sbin/sukernel > /su/bin/sukernel
+/sbin/busybox chmod 0755 /su/bin/*
+/sbin/busybox chown 0.0 /su/bin/*
+/sbin/busybox chcon u:object_r:system_file:s0 /su/bin/*
+#symlink
+/sbin/busybox ln -s /system/xbin/.android /
+#autoDaemon
+/su/bin/daemonsu --auto-daemon
+/su/bin/daemonsu --daemon
